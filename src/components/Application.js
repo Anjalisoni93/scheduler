@@ -5,7 +5,6 @@ import DayList from "./DayList";
 import Appointment from "components/Appointment";
 import axios from "axios";
 import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
-import useVisualMode from "hooks/useVisualMode";
 
 
 
@@ -18,16 +17,22 @@ export default function Application(props) {
     interview: {}
   });
 
-/*   function bookInterview(id, interview) {
-    console.log(id, interview);
-  }
-
-  function save(name, interviewer) {
-    const interview = {
-      student: name,
-      interviewer
+  function bookInterview(id, interview) {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview }
     };
-  } */
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment
+    };
+
+    return axios.put(`/api/appointments/${id}`, appointment)
+    .then((() => {
+      setState(prev => ({...prev, appointments}));
+    }));
+    
+  }
 
   
   const setDay = day => setState({ ...state, day });
@@ -55,6 +60,7 @@ export default function Application(props) {
         time={appointment.time} 
         interview={interview}
         interviewers = {interviewersForDay} 
+        bookInterview = {bookInterview}
       />
     );
   });
