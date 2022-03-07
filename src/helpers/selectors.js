@@ -17,7 +17,18 @@ export function getInterview (state, interview) {
       student,
       interviewer: state.interviewers[idInterviewer]
     }
-  }
+  }  
 
   return null;
 }
+
+export function getInterviewersForDay(state, day) {
+  if (state.days.length === 0) {
+    return [];
+  }
+  const getDay = state.days.filter(newDay => newDay.name === day);
+  if (getDay.length === 0) {
+    return [];
+  }
+  return getDay[0].interviewers.map(e => state.interviewers[e]);
+};
