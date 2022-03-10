@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import InterviewerList from "../InterviewerList";
 
-export default function Form(props){
+export default function Form(props) {
   const [student, setStudent] = useState(props.student || "");
   const [interviewer, setInterviewer] = useState(props.interviewer || null);
   const [error, setError] = useState("");
@@ -27,29 +27,27 @@ export default function Form(props){
       setError("Please selet an interviewer");
       return;
     }
-    setError("")
+    setError("");
     props.onSave(student, interviewer);
   }
 
-  return(
+  return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
-        <form autoComplete="off"  onSubmit={event => event.preventDefault()}>
+        <form autoComplete="off" onSubmit={(event) => event.preventDefault()}>
           <input
             className="appointment__create-input text--semi-bold"
             name={student}
             type="text"
             placeholder="Enter Student Name"
             value={student}
-            onChange={e => {
+            onChange={(e) => {
               setStudent(e.target.value);
             }}
           />
         </form>
-        <section className="appointment__validation">
-            {error}
-        </section>
-        <InterviewerList 
+        <section className="appointment__validation">{error}</section>
+        <InterviewerList
           interviewers={props.interviewers}
           value={interviewer}
           onChange={setInterviewer}
@@ -57,8 +55,12 @@ export default function Form(props){
       </section>
       <section className="appointment__card-right">
         <section className="appointment__actions">
-          <Button danger onClick={cancel}>Cancel</Button>
-          <Button confirm onClick={validate}>Save</Button>
+          <Button danger onClick={cancel}>
+            Cancel
+          </Button>
+          <Button confirm onClick={validate}>
+            Save
+          </Button>
         </section>
       </section>
     </main>
