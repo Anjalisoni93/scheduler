@@ -9,15 +9,14 @@ export default function useApplicationData() {
     interview: {}
   });
 
-  //updating spot function
   function updateSpots(state, appointments) {
     let appointment;
     const currentDay = state.days.find((day, index) => {
       if (state.day === day.name) {
         appointment = index;
-        return day
-      }
-    })
+        return day;
+      };
+    });
 
     let spots = 0;
     for (let dayOne of currentDay.appointments) {
