@@ -7,7 +7,7 @@ import useVisualMode from "hooks/useVisualMode";
 import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
-// import Error from "./Error";
+import Error from "./Error";
 
 export default function Appointment(props) {
   const EMPTY = "EMPTY";
@@ -85,6 +85,8 @@ export default function Appointment(props) {
           onCancel={() => transition(SHOW)}
         />
       )}
+      {mode === ERROR_SAVE && <Error message={"Error while saving."} onClose={() => back()} />}
+      {mode === ERROR_DELETE && <Error message={"Error while deleting."} onClose={() => transition(SHOW)} />}
     </article>
   );
 }
