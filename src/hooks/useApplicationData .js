@@ -16,6 +16,7 @@ export default function useApplicationData() {
         appointment = index;
         return day;
       }
+      return null;
     });
 
     let spots = 0;
